@@ -82,4 +82,35 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // 6. Send Form Data to WhatsApp
+    const consultationForm = document.getElementById('consultationForm');
+    
+    if (consultationForm) {
+        consultationForm.addEventListener('submit', function(e) {
+            // Prevent the default form submission (page reload)
+            e.preventDefault();
+            
+            // Get the values from the form
+            const name = document.getElementById('waName').value;
+            const email = document.getElementById('waEmail').value;
+            const message = document.getElementById('waMessage').value;
+            
+            // YOUR WHATSAPP NUMBER HERE (Include country code, no '+' or spaces)
+            // Example for India: '919876543210'
+            const phoneNumber = '918707566676'; 
+            
+            // Format the message with line breaks (%0A)
+            const whatsappText = `Hello LUMIÈRE! I would like to book a consultation.%0A%0A*Name:* ${name}%0A*Email:* ${email}%0A*Message:* ${message}`;
+            
+            // Create the API URL
+            const whatsappURL = `https://wa.me/${phoneNumber}?text=${whatsappText}`;
+            
+            // Open WhatsApp in a new tab/window
+            window.open(whatsappURL, '_blank');
+            
+            // Optional: Clear the form after sending
+            consultationForm.reset();
+        });
+    }
+
 });
